@@ -2,8 +2,6 @@
 
 Formation initiation originale : https://www.youtube.com/watch?v=oCINeytlyRA
 
-Récupérer le projet https://gitlab.com/react-avance/react-pokemons-app
-
 Installer les dépendances avec `npm install` ou `yarn install`
 
 Lancer le serveur de dev avec `npm run start` ou `yarn start`
