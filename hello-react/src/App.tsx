@@ -1,16 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import TodoItem from "./TodoItem";
 import type { Todo } from "./model";
+import { fetchTodos } from "./api";
 
 function App() {
+  console.log('App rendered');
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState<Todo[]>([
-    { id: "123abc", title: "ABC", completed: true },
-    { id: "456def", title: "DEF", completed: false },
-    { id: "789xyz", title: "XYZ", completed: true },
+    // { id: "123abc", title: "ABC", completed: true },
+    // { id: "456def", title: "DEF", completed: false },
+    // { id: "789xyz", title: "XYZ", completed: true },
   ]);
-  const editingId = "789xyz";
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchTodos().then((todos) => {
+      setTodos(todos);
+    });
+  }, []);
+
+  useEffect(() => {
+    const handleWindowClick = (event: MouseEvent) => {
+      console.log('window click', editingId);
+      const target = event.target as HTMLElement;
+      if (editingId && !target.classList.contains('todosInputValue')) {
+        setEditingId(null);
+      }
+    };
+    window.addEventListener("click", handleWindowClick);
+    return () => {
+      window.removeEventListener("click", handleWindowClick);
+    };
+  }, [editingId]);
 
   const handleNewTodoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodo(event.target.value);
@@ -35,6 +57,18 @@ function App() {
     );
   };
 
+  const handleTodoDelete = (todo: Todo) => {
+    setTodos(todos.filter((t) => t.id !== todo.id));
+  };
+
+  const handleTodoEdit = (todo: Todo) => {
+    setTodos(todos.map((t) => t.id === todo.id ? todo : t));
+  };
+
+  const handleTodoEditing = (id: string | null) => {
+    setEditingId(id);
+  };
+
   return (
     <>
       <form className="todos-form" onSubmit={handleNewTodoSubmit}>
@@ -57,6 +91,9 @@ function App() {
             key={todo.id}
             todo={todo}
             isEditing={editingId === todo.id}
+            onDelete={handleTodoDelete}
+            onEdit={handleTodoEdit}
+            onEditing={handleTodoEditing}
           />
         ))}
       </div>

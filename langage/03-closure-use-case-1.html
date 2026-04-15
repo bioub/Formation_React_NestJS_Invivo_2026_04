@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        function createButton(label) {
+            const button = document.createElement('button');
+            button.innerText = label;
+            button.addEventListener('click', () => {
+                console.log(label);
+            });
+            return button;
+        }
+
+        const button1 = createButton('Button 1');
+        document.body.appendChild(button1);
+
+        const button2 = createButton('Button 2');
+        document.body.appendChild(button2);
+
+        const button3 = createButton('Button 3');
+        document.body.appendChild(button3);
+    </script>
+</body>
+</html>
