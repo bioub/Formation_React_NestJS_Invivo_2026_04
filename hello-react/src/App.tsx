@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import TodoItem from "./TodoItem";
 import type { Todo } from "./model";
 import { fetchTodos } from "./api";
+import Select, { type MenuRef } from "./Select";
+
+const FILTER_OPTIONS = ['all', 'completed', 'incomplete'];
+type Filter = 'all' | 'completed' | 'incomplete';
 
 function App() {
   console.log('App rendered');
@@ -13,6 +17,9 @@ function App() {
     // { id: "789xyz", title: "XYZ", completed: true },
   ]);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [filter, setFilter] = useState<'all' | 'completed' | 'incomplete'>("all");
+
+  const secondSelectRef = useRef<MenuRef | null>(null);
 
   useEffect(() => {
     fetchTodos().then((todos) => {
@@ -97,6 +104,14 @@ function App() {
           />
         ))}
       </div>
+      <footer>
+        <Select options={FILTER_OPTIONS} value={filter} onChange={(v) => {
+          setFilter(v as Filter);
+          secondSelectRef.current?.open();
+        }}/>
+        <Select options={FILTER_OPTIONS} value={filter} onChange={(v) => setFilter(v as Filter)} ref={secondSelectRef} />
+
+      </footer>
     </>
   );
 }
