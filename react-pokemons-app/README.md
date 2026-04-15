@@ -4,9 +4,9 @@ Formation initiation originale : https://www.youtube.com/watch?v=oCINeytlyRA
 
 Installer les dépendances avec `npm install` ou `yarn install`
 
-Lancer le serveur de dev avec `npm run start` ou `yarn start`
+Lancer le serveur de dev avec `npm run dev` ou `yarn dev`
 
-Lancer l'API REST avec `npm run start:api` ou `yarn start:api`
+Lancer l'API REST avec `npm run api` ou `yarn api`
 
 # Exercice 1 : Rappels (déjà fait)
 
