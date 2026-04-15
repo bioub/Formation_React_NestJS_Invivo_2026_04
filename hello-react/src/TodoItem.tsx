@@ -7,7 +7,8 @@ interface TodoItemProps {
 
 function TodoItem({ todo, isEditing }: TodoItemProps) {
   return (
-    <div className="todosItem" data-todo-id={todo.id}>      <input
+    <div className="todosItem" data-todo-id={todo.id}>
+      <input
         type="checkbox"
         className="todosCompleted"
         checked={todo.completed}
