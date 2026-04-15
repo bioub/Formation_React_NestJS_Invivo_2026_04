@@ -5,8 +5,10 @@ import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
+import { useCompare } from '../helpers/compare-context';
 
 function PokemonList() {
+  const { pokemonsIds } = useCompare();
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
@@ -28,13 +30,13 @@ function PokemonList() {
           ))}
         </div>
       </div>
-      <Link
+      {pokemonsIds.length === 2 && <Link
         className="btn-floating btn-large waves-effect waves-light teal z-depth-3"
         style={{ position: 'fixed', bottom: '25px', right: '100px' }}
         to="/pokemon/compare"
       >
         <i className="material-icons">compare</i>
-      </Link>
+      </Link>}
       <Link
         className="btn-floating btn-large waves-effect waves-light red z-depth-3"
         style={{ position: 'fixed', bottom: '25px', right: '25px' }}

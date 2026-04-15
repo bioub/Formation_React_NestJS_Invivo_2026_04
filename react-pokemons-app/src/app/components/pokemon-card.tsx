@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
+import { useCompare } from '../helpers/compare-context';
 
 type Props = {
   pokemon: Pokemon;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 function PokemonCard({ pokemon }: Props) {
+  const { togglePokemonId, pokemonsIds } = useCompare();
   const navigate = useNavigate();
 
   function goToPokemon(id: number) {
@@ -33,7 +35,7 @@ function PokemonCard({ pokemon }: Props) {
               </span>
             ))}
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" onChange={() => togglePokemonId(pokemon.id ?? 0)} checked={pokemonsIds.includes(pokemon.id ?? 0)} />
               <span>Compare</span>
             </label>
             <Link to={`/pokemons/${pokemon.id}`} className="btn btn-primary">Show</Link>
