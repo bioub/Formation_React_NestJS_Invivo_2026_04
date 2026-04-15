@@ -157,3 +157,60 @@ Ecouter le click ou le change de la checkbox :
 `<input type="checkbox" className="todos-toggle-checked" />`
 
 Au click cocher/décocher toutes les checkboxes de `TodoItem`.
+
+## Effects
+
+Créer la fonction suivante dans App :
+
+```
+async function fetchTodos() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos');
+  const data = await res.json();
+  return data
+    .slice(0, 20);
+}
+```
+
+Appeler cette fonction dans un effet au chargement du composant et stocker
+les résultats dans le state `todos`
+
+```
+fetchTodos().then((todos) => {
+  
+})
+```
+
+## Communication inter-composant
+
+### Exercice 1
+
+Dans `TodoItem`, lorsqu'on clique sur le bouton moins, on doit supprimer la todo
+du state todos de `App`
+
+Pour celà on va descendre un fonction déclarée dans `App` via les props de `TodoItem`
+
+Au click du bouton moins, appeler cette fonction avec la todo reçue des props
+
+Déclarer une fonction `handleTodoDelete` dans `App`, qui va supprimer du tableau (de manière immuable) la todo reçue en paramètre
+
+Indice: pour supprimer un ou plusieurs élément en immuable vous pouvez utiliser filter du type Array (slides 168, 169, 170)
+
+### Exercice 2
+
+Au double-click de la balise span, remonter jusqu'à App l'id de la todo dans `editingId` (qui doit être transformé en un state)
+
+### Exercice 3 (Bonus)
+
+Lorsqu'on saisi dans un champ remonter la valeur saisie avec `onTodoEdit`
+
+### Exercice 4 (Bonus)
+
+Ecouter l'événement keydown de l'input, s'il correspond à la touche Entrée, repasser `editingId` à `0` ou `-1`
+
+### Exercice 5 (Bonus)
+
+Transformer le code pour faire en sorte d'appeler `onTodoEdit` lorsqu'on clique sur une checkbox de la liste (doit mettre à jour completed)
+
+### Exercice 6 (Bonus)
+
+Dans App écouter le click de window dans un Effet et remettre editingId à `0` ou `-1`

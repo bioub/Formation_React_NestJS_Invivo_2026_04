@@ -50,7 +50,6 @@ function App() {
           onChange={handleNewTodoChange}
         />
         <button>+</button>
-        <div>{Math.random()}</div>
       </form>
       <div className="todos-container">
         {todos.map((todo) => (
