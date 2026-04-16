@@ -151,7 +151,7 @@ Installer @nestjs/config puis créer un fichier .env avec les variables de confi
 - JWT_SECRET : string
 - DB_DATABASE : 'chemin_vers_le_fichier.sqlite'
 
-Installer @nestjs/typeorm puis le configurer avec une base de données SQLite (dans /data/db.sqlite), s'inspirer de cette documentation :
+Installer @nestjs/typeorm, typeorm et sqlite3 (ou pg) puis le configurer avec une base de données SQLite (dans /data/db.sqlite), s'inspirer de cette documentation :
 https://docs.nestjs.com/techniques/database#async-configuration
 
 Modifier les classes Product, Category, Order, User pour qu'elles soient correspondantes avec les entités TypeORM.
